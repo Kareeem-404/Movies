@@ -1,5 +1,11 @@
+import Movies from "./Movies";
+import TV from "./TV";
+
 export default function Home() {
   return (
-    <p>Home</p>
+    <>
+      <Movies />
+      <TV />
+    </>
   );
 }

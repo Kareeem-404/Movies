@@ -16,13 +16,16 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/movies" element={<Movies />} />
           <Route path="/tv" element={<TV />} />
-          <Route path="/movie/:id" element={<Movie />} />
-          <Route path="/" element={<Login />} />
+          <Route path="/:type/:id" element={<Movie />} />
+          <Route path="/:type/:id" element={<Movie />} />
+          <Route path="/" element={localStorage.getItem("token") ? <Home /> : <Login />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
         </Routes>
       </main> : <main className="p-10">
         <Routes>
           <Route path="/" element={<Login />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
         </Routes>   
       </main>}

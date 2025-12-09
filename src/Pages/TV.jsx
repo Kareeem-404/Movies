@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 export default function TV() {
 
   const [movies, setMovies] = useState([]);
+
   useEffect(() => {
     fetchMovies();
   }, []);
@@ -20,7 +21,7 @@ export default function TV() {
       <Title title="TV Trend" />
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 my-10 max-w-7xl mx-auto">
         {movies.map((movie) => (
-          <Card key={movie.id} title={movie.name} image={'https://image.tmdb.org/t/p/w500/' + movie.poster_path} movieId={movie.id} />
+          <Card key={movie.id} title={movie.name} rating={movie.vote_average} type="tv" image={'https://image.tmdb.org/t/p/w500/' + movie.poster_path} movieId={movie.id} />
         ))}
       </div>
     </>
