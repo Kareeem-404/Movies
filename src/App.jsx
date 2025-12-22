@@ -8,6 +8,7 @@ import Login from "./Pages/Login"
 import Register from "./Pages/Register"
 import Footer from "./Layout/Footer";
 import ProtectedRoute from "./Pages/ProtectedRoute";
+
 function App() {
   return (
     <>
