@@ -36,8 +36,8 @@ export default function Login() {
             } else if(data.msg == "invalid password") {
                 setErrors({ ...errors, passwordError: "Password is wrong" });
             } else {
-                navigate("/home");
                 localStorage.setItem("token", data.token);
+                navigate("/home");
             }
         } catch (error) {
             console.log(error);

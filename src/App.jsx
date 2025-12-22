@@ -7,28 +7,23 @@ import Movie from "./Pages/Movie"
 import Login from "./Pages/Login"
 import Register from "./Pages/Register"
 import Footer from "./Layout/Footer";
+import ProtectedRoute from "./Pages/ProtectedRoute";
 function App() {
   return (
     <>
       <Nav />
-      {localStorage.getItem("token") ? <main className="p-10">
+      <main className="p-10">
         <Routes>
-          <Route path="/home" element={<Home />} />
-          <Route path="/movies" element={<Movies />} />
-          <Route path="/tv" element={<TV />} />
-          <Route path="/:type/:id" element={<Movie />} />
-          <Route path="/:type/:id" element={<Movie />} />
-          <Route path="/" element={localStorage.getItem("token") ? <Home /> : <Login />} />
+          <Route path="/home" element={<ProtectedRoute> <Home /> </ProtectedRoute>} />
+          <Route path="/movies" element={<ProtectedRoute> <Movies /> </ProtectedRoute>} />
+          <Route path="/tv" element={<ProtectedRoute> <TV /> </ProtectedRoute>} />
+          <Route path="/:type/:id" element={<ProtectedRoute> <Movie /> </ProtectedRoute>} />
+          <Route path="/:type/:id" element={<ProtectedRoute> <Movie /> </ProtectedRoute>} />
+          <Route path="/" element={localStorage.getItem("token") ? <ProtectedRoute> <Home /> </ProtectedRoute> : <Login />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
         </Routes>
-      </main> : <main className="p-10">
-        <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-        </Routes>   
-      </main>}
+      </main>
       <Footer />
     </>
   );

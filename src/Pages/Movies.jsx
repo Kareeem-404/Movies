@@ -12,7 +12,7 @@ export default function Movies() {
   const fetchMovies = async () => {
     const res = await fetch("https://api.themoviedb.org/3/trending/movie/day?api_key=44ee5523e457e74020effc2bddc4592e");
     const data = await res.json();
-    setMovies(data.results);
+    setMovies(data.results || []);
   };
 
   return (

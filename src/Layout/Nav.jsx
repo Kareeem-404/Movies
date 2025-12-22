@@ -1,11 +1,12 @@
 import { Link, useNavigate } from "react-router";
+import Login from "../Pages/Login";
 
 export default function Nav() {
 
     const navigate = useNavigate();
     const handleLogout = () => {
         localStorage.removeItem("token");
-        navigate("/login");
+        navigate("/login");        
     }
 
     return (
@@ -30,13 +31,13 @@ export default function Nav() {
                   </li>
                 </ul>
                 <span className="cursor-pointer">
-                  <Link to="/" onClick={handleLogout}>Logout</Link>
+                  <span onClick={handleLogout}>Logout</span>
                 </span>
               </>
             ) : (
               <ul className="flex gap-4">
                 <li>
-                  <Link to="/">Login</Link>
+                  <Link to="/login">Login</Link>
                 </li>
                 <li>
                   <Link to="/register">Register</Link>
@@ -62,7 +63,7 @@ export default function Nav() {
                     <Link to="/tv">TV</Link>
                   </li>
                   <span className="hover:bg-blue-900 py-2 cursor-pointer hover:ps-2 transition-all duration-200">
-                    <Link to="/" onClick={handleLogout}>Logout</Link>
+                    <span onClick={handleLogout}>Logout</span>
                   </span>
                 </ul>
               </>
