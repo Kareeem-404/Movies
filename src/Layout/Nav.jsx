@@ -13,7 +13,7 @@ export default function Nav() {
     <>
       <nav className="bg-blue-300 sticky top-0 left-0 right-0 z-50">
         <div className=" items-center max-w-7xl flex justify-between gap-5 mx-auto py-4 px-6 text-white">
-          <Link className="text-2xl" to="/">
+          <Link className="text-2xl">
             Final
           </Link>
           <div className={`md:flex justify-between hidden ${localStorage.getItem("token") && "w-full"}`}>
@@ -21,13 +21,13 @@ export default function Nav() {
               <>
                 <ul className="flex gap-4 items-center">
                   <li>
-                    <Link to="/home">Home</Link>
+                    <Link to="/home" className={`${location.pathname == "/home" ? "text-gray-700" : "text-white"}`}>Home</Link>
                   </li>
                   <li>
-                    <Link to="/movies">Movies</Link>
+                    <Link to="/movies" className={`${location.pathname == "/movies" ? "text-gray-700" : "text-white"}`}>Movies</Link>
                   </li>
                   <li>
-                    <Link to="/tv">TV</Link>
+                    <Link to="/tv" className={`${location.pathname == "/tv" ? "text-gray-700" : "text-white"}`}>TV</Link>
                   </li>
                 </ul>
                 <span className="cursor-pointer">

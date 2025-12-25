@@ -51,7 +51,7 @@ export default function Register() {
 
     // styles
     const labelStyle = "text-blue-300 font-medium text-2xl";
-    const inputStyle = "border border-gray-300 rounded-md px-4 py-2 w-full mt-2";
+    const inputStyle = "border border-gray-300 rounded-md px-4 py-2 w-full mt-2 dark:text-white";
     const errorStyle = "text-red-500";
     const buttonStyle = "bg-blue-300 px-10 text-white py-3 rounded-md self-center cursor-pointer";
     // styles
