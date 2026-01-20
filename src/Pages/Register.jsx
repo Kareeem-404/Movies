@@ -1,152 +1,134 @@
-import Form from "../components/Form"
-import { useState, useMemo } from "react";
+import Form from "../components/Form";
 import { useNavigate } from "react-router";
+import { useForm } from "react-hook-form";
 
 export default function Register() {
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    const [user, setUser] = useState({
-        name: "",
-        email: "",
-        password: "",
-        age: "",
-        phone: "",
-    });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
-    const [errors, setErrors] = useState({
-        nameError: "",
-        emailError: "",
-        passwordError: "",
-        ageError: "",
-        phoneError: "",
-    });
+  const onSubmit = async (data) => {
+    try {
+      await fetch("https://note-sigma-black.vercel.app/api/v1/users/signUp", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            if (nameError || emailError || passwordError || ageError || phoneError) {
-                return;
-            }
-            const response = await fetch("https://note-sigma-black.vercel.app/api/v1/users/signUp", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(user),
-            });
-            navigate("/");
-        } catch (error) {
-            console.log(error);
-        }
+      navigate("/");
+    } catch (error) {
+      console.log(error);
     }
+  };
 
-    // regex
-    const nameRegex = /^[a-zA-z]{3,}$/;
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[.\W])[A-Za-z\d.\W]{8,}$/;
-    const ageRegex = /^(1[8-9]|[2-7]\d|80)$/;
-    const phoneRegex = /^(010|011|012|015)\d{8}$/;
-    // regex
+  const labelStyle = "text-blue-300 font-medium text-2xl";
+  const inputStyle =
+    "border border-gray-300 rounded-md px-4 py-2 w-full mt-2 dark:text-white";
+  const errorStyle = "text-red-500";
+  const buttonStyle =
+    "bg-blue-300 px-10 text-white py-3 rounded-md self-center cursor-pointer";
+    const formStyle = "flex flex-col gap-6";
 
-    // styles
-    const labelStyle = "text-blue-300 font-medium text-2xl";
-    const inputStyle = "border border-gray-300 rounded-md px-4 py-2 w-full mt-2 dark:text-white";
-    const errorStyle = "text-red-500";
-    const buttonStyle = "bg-blue-300 px-10 text-white py-3 rounded-md self-center cursor-pointer";
-    // styles
+  return (
+    <Form title="Register">
+      <form onSubmit={handleSubmit(onSubmit)} className={formStyle}>
 
-    const { nameError, emailError, passwordError, ageError, phoneError } = errors;
-    const { name, email, password, age, phone } = user;
+        <div>
+          <label className={labelStyle}>Name</label>
+          <input
+            className={inputStyle}
+            {...register("name", {
+              required: "Name is required",
+              minLength: {
+                value: 3,
+                message: "Name must be at least 3 characters",
+              },
+            })}
+          />
+          <p className={errorStyle}>{errors.name?.message}</p>
+        </div>
 
-    const nameValidation = useMemo(() => {
-        if (name == "") {
-            setErrors({ ...errors, nameError: "" });
-        } else if (!nameRegex.test(name)) {
-            setErrors({ ...errors, nameError: "Name must be at least 3 characters long" });
-        } else {
-            setErrors({ ...errors, nameError: "" });
-        }
-    }, [name]);
+        <div>
+          <label className={labelStyle}>Email</label>
+          <input
+            className={inputStyle}
+            type="email"
+            {...register("email", {
+              required: "Email is required",
+              pattern: {
+                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                message: "Email is not valid",
+              },
+            })}
+          />
+          <p className={errorStyle}>{errors.email?.message}</p>
+        </div>
 
-    const emailValidation = useMemo(() => {
-        if (email == "") {
-            setErrors({ ...errors, emailError: "" });
-        } else if (!emailRegex.test(email)) {
-            setErrors({ ...errors, emailError: "Email is not valid" });
-        } else {
-            setErrors({ ...errors, emailError: "" });
-        }
-    }, [email]);
+        <div>
+          <label className={labelStyle}>Password</label>
+          <input
+            className={inputStyle}
+            type="password"
+            {...register("password", {
+              required: "Password is required",
+              pattern: {
+                value:
+                  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[.\W])[A-Za-z\d.\W]{8,}$/,
+                message:
+                  "Password must contain uppercase, lowercase, number & special character",
+              },
+            })}
+          />
+          <p className={errorStyle}>{errors.password?.message}</p>
+        </div>
 
-    const passwordValidation = useMemo(() => {
-        if (password == "") {
-            setErrors({ ...errors, passwordError: "" });
-        } else if (!passwordRegex.test(password)) {
-            setErrors({ ...errors, passwordError: "Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character" });
-        } else {
-            setErrors({ ...errors, passwordError: "" });
-        }
-    }, [password]);
+        <div>
+          <label className={labelStyle}>Age</label>
+          <input
+            className={inputStyle}
+            type="number"
+            {...register("age", {
+              required: "Age is required",
+              min: {
+                value: 18,
+                message: "Age must be at least 18",
+              },
+              max: {
+                value: 80,
+                message: "Age must be less than 80",
+              },
+            })}
+          />
+          <p className={errorStyle}>{errors.age?.message}</p>
+        </div>
 
-    const ageValidation = useMemo(() => {
-        if (age == "") {
-            setErrors({ ...errors, ageError: "" });
-        } else if (!ageRegex.test(age)) {
-            setErrors({ ...errors, ageError: "Age must be between 18 and 80" });
-        } else {
-            setErrors({ ...errors, ageError: "" });
-        }
-    }, [age]);
+        <div>
+          <label className={labelStyle}>Phone</label>
+          <input
+            className={inputStyle}
+            type="text"
+            {...register("phone", {
+              required: "Phone is required",
+              pattern: {
+                value: /^(010|011|012|015)\d{8}$/,
+                message: "Phone number is not valid",
+              },
+            })}
+          />
+          <p className={errorStyle}>{errors.phone?.message}</p>
+        </div>
 
-    const phoneValidation = useMemo(() => {
-        if (phone == "") {
-            setErrors({ ...errors, phoneError: "" });
-        } else if (!phoneRegex.test(phone)) {
-            setErrors({ ...errors, phoneError: "Phone number must be 11 digits long and start with 010, 011, 012, or 015" });
-        } else {
-            setErrors({ ...errors, phoneError: "" });
-        }
-    }, [phone]);
-
-    return (
-        <Form title="Register">
-            <div>
-                <label className={labelStyle} htmlFor="name">Name</label>
-                <input className={inputStyle} type="text" id="name" onChange={(e) => setUser({ ...user, name: e.target.value.trim() })} />
-                <p className={errorStyle}>
-                    {nameError}
-                </p>
-            </div>
-            <div>
-                <label className={labelStyle} htmlFor="email">Email</label>
-                <input className={inputStyle} type="email" id="email" onChange={(e) => setUser({ ...user, email: e.target.value.trim() })} />
-                <p className={errorStyle}>
-                    {emailError}
-                </p>
-            </div>
-            <div>
-                <label className={labelStyle} htmlFor="password">Password</label>
-                <input className={inputStyle} type="password" id="password" onChange={(e) => setUser({ ...user, password: e.target.value.trim() })} />
-                <p className={errorStyle}>
-                    {passwordError}
-                </p>
-            </div>
-            <div>
-                <label className={labelStyle} htmlFor="age">Age</label>
-                <input className={inputStyle} type="number" id="age" onChange={(e) => setUser({ ...user, age: e.target.value.trim() })} />
-                <p className={errorStyle}>
-                    {ageError}
-                </p>
-            </div>
-            <div>
-                <label className={labelStyle} htmlFor="phone">Phone</label>
-                <input className={inputStyle} type="number" id="phone" onChange={(e) => setUser({ ...user, phone: e.target.value.trim() })} />
-                <p className={errorStyle}>
-                    {phoneError}
-                </p>
-            </div>
-            <button className={buttonStyle} onClick={handleSubmit}>Register</button>
-        </Form>
-    )
+        <button className={buttonStyle} type="submit">
+          Register
+        </button>
+      </form>
+    </Form>
+  );
 }

@@ -10,9 +10,9 @@ export default function Form({ children, title }) {
         </div>
         <div className="md:w-1/2">
           <Title title={title} />
-          <form className="flex flex-col gap-6">
+          <div className="flex flex-col gap-6">
             {children}
-          </form>
+          </div>
         </div>
       </div>
     </>
