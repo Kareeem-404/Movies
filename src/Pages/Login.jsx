@@ -72,12 +72,12 @@ export default function Login() {
             <form className={formStyle}>
                 <div>
                     <label className={labelStyle} htmlFor="email">Email</label>
-                    <input id="email" className={inputStyle} type="email" onChange={(e) => setUser({ ...user, email: e.target.value })} />
+                    <input id="email" className={inputStyle} type="email" ref={emailRef} />
                     <p className={errorStyle}>{emailError}</p>
                 </div>
                 <div>
                     <label className={labelStyle} htmlFor="password">Password</label>
-                    <input id="password" className={inputStyle} type="password" onChange={(e) => setUser({ ...user, password: e.target.value })} />
+                    <input id="password" className={inputStyle} type="password" ref={passwordRef} />
                     <p className={errorStyle}>{passwordError}</p>
                 </div>
                 <button disabled={loading} className={buttonStyle} onSubmit={handleSubmit}>{loading ? "loading" : "Login"}</button>
