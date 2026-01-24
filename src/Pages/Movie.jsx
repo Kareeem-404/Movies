@@ -26,25 +26,30 @@ const Movie = () => {
   const voteCountStyle = "text-xl font-medium dark:text-white";
   const dateStyle = "text-xl font-medium dark:text-white";
   const spanStyle = "text-blue-300";
+  const overviewStyle = "text-xl font-medium dark:text-white";
+  const movieContainerStyle = "md:flex gap-10 mb-10 md:mb-0 max-w-7xl mx-auto";
+  const imageContainerStyle = "md:w-1/2";
+  const movieContentStyle = "md:w-3/4 space-y-5";
+  const genreContainerStyle = "flex gap-5";
   // -------------------------- Styles --------------------------
 
   return (
-    <div className="md:flex gap-10 mb-10 md:mb-0 max-w-7xl mx-auto">
-      <div className="md:w-1/2">
+    <div className={movieContainerStyle}>
+      <div className={imageContainerStyle}>
         <img
           className={imageStyle}
           src={"https://image.tmdb.org/t/p/w500/" + data.poster_path}
           alt=""
         />
       </div>
-      <div className="md:w-3/4 space-y-5">
+      <div className={movieContentStyle}>
         <h2 className={titleStyle}>
           Title: <span className={spanStyle}>{type === "movie" ? data.title : data.name}</span>
         </h2>
         <p className={taglineStyle}>
           Tagline: <span className={spanStyle}>{type === "movie" ? data.tagline : data.tagline}</span>
         </p>
-        <div className="flex gap-5">
+        <div className={genreContainerStyle}>
           {data.genres?.map((genre) => (
             <p
               className={genreStyle}
