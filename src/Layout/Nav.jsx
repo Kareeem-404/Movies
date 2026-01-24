@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router";
+import { Link, useNavigate, NavLink } from "react-router";
 import Login from "../Pages/Login";
 
 export default function Nav() {
@@ -8,6 +8,10 @@ export default function Nav() {
         localStorage.removeItem("token");
         navigate("/login");        
     }
+
+    // -------------------------- Styles --------------------------
+    const li_2_Style = "hover:bg-blue-900 py-2 cursor-pointer hover:ps-2 transition-all duration-200";
+    // -------------------------- Styles --------------------------
 
     return (
     <>
@@ -21,13 +25,13 @@ export default function Nav() {
               <>
                 <ul className="flex gap-4 items-center">
                   <li>
-                    <Link to="/home" className={`${location.pathname == "/home" ? "text-gray-700" : "text-white"}`}>Home</Link>
+                    <NavLink to="/home" className={({ isActive }) => isActive ? "text-gray-700" : "text-white"}>Home</NavLink>
                   </li>
                   <li>
-                    <Link to="/movies" className={`${location.pathname == "/movies" ? "text-gray-700" : "text-white"}`}>Movies</Link>
+                    <NavLink to="/movies" className={({ isActive }) => isActive ? "text-gray-700" : "text-white"}>Movies</NavLink>
                   </li>
                   <li>
-                    <Link to="/tv" className={`${location.pathname == "/tv" ? "text-gray-700" : "text-white"}`}>TV</Link>
+                    <NavLink to="/tv" className={({ isActive }) => isActive ? "text-gray-700" : "text-white"}>TV</NavLink>
                   </li>
                 </ul>
                 <span className="cursor-pointer">
@@ -37,10 +41,10 @@ export default function Nav() {
             ) : (
               <ul className="flex gap-4">
                 <li>
-                  <Link to="/login">Login</Link>
+                  <NavLink to="/login">Login</NavLink>
                 </li>
                 <li>
-                  <Link to="/register">Register</Link>
+                  <NavLink to="/register">Register</NavLink>
                 </li>
               </ul>
             )}
@@ -53,27 +57,27 @@ export default function Nav() {
             {localStorage.getItem("token") ? (
               <>
                 <ul className="flex flex-col px-10 pb-4">
-                  <li className="hover:bg-blue-900 py-2 cursor-pointer hover:ps-2 transition-all duration-200">
-                    <Link to="/home">Home</Link>
+                  <li className={li_2_Style}>
+                    <NavLink to="/home">Home</NavLink>
                   </li>
-                  <li className="hover:bg-blue-900 py-2 cursor-pointer hover:ps-2 transition-all duration-200">
-                    <Link to="/movies">Movies</Link>
+                  <li className={li_2_Style}>
+                    <NavLink to="/movies">Movies</NavLink>
                   </li>
-                  <li className="hover:bg-blue-900 py-2 cursor-pointer hover:ps-2 transition-all duration-200">
-                    <Link to="/tv">TV</Link>
+                  <li className={li_2_Style}>
+                    <NavLink to="/tv">TV</NavLink>
                   </li>
-                  <span className="hover:bg-blue-900 py-2 cursor-pointer hover:ps-2 transition-all duration-200">
+                  <span className={li_2_Style}>
                     <span onClick={handleLogout}>Logout</span>
                   </span>
                 </ul>
               </>
             ) : (
               <ul className="flex flex-col px-10 pb-4">
-                <li className="hover:bg-blue-900 py-2 cursor-pointer hover:ps-2 transition-all duration-200">
-                  <Link to="/">Login</Link>
+                <li className={li_2_Style}>
+                  <NavLink to="/">Login</NavLink>
                 </li>
-                <li className="hover:bg-blue-900 py-2 cursor-pointer hover:ps-2 transition-all duration-200">
-                  <Link to="/register">Register</Link>
+                <li className={li_2_Style}>
+                  <NavLink to="/register">Register</NavLink>
                 </li>
               </ul>
             )}

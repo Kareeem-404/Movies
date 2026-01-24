@@ -9,24 +9,53 @@ export default function Register() {
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors },
   } = useForm();
 
+  const handleApiErrors = (error) => {
+    const errorMsg = error.msg;
+    if (errorMsg === "email already exists") {
+      setError("email", {
+        type: "server",
+        message: "Email already exists"
+      })
+    } else if (errorMsg === "name is required") {
+      setError("name", {
+        type: "server",
+        message: "Name is required"
+      })
+    } else if (errorMsg === "password is required") {
+      setError("password", {
+        type: "server",
+        message: "Password is required"
+      })
+    } else if (errorMsg === "age is required") {
+      setError("age", {
+        type: "server",
+        message: "Age is required"
+      })
+    } else if (errorMsg === "phone is required") {
+      setError("phone", {
+        type: "server",
+        message: "Phone is required"
+      })
+    }
+  }
+
   const onSubmit = async (data) => {
     try {
-      await fetch("https://note-sigma-black.vercel.app/api/v1/users/signUp", {
+      const response = fetch("https://note-sigma-black.vercel.app/api/v1/users/signUp", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "application/json"
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify(data)
       });
-
-      navigate("/");
     } catch (error) {
-      console.log(error);
+      handleApiErrors(error)
     }
-  };
+  }
 
   const labelStyle = "text-blue-300 font-medium text-2xl";
   const inputStyle =
@@ -34,12 +63,12 @@ export default function Register() {
   const errorStyle = "text-red-500";
   const buttonStyle =
     "bg-blue-300 px-10 text-white py-3 rounded-md self-center cursor-pointer";
-    const formStyle = "flex flex-col gap-6";
+  const formStyle = "flex flex-col gap-6";
 
   return (
     <Form title="Register">
       <form onSubmit={handleSubmit(onSubmit)} className={formStyle}>
-
+        {/* -------------------------- Name -------------------------- */}
         <div>
           <label className={labelStyle}>Name</label>
           <input
@@ -54,7 +83,10 @@ export default function Register() {
           />
           <p className={errorStyle}>{errors.name?.message}</p>
         </div>
+        {/* -------------------------- Name -------------------------- */}
 
+
+        {/* -------------------------- Email -------------------------- */}
         <div>
           <label className={labelStyle}>Email</label>
           <input
@@ -70,7 +102,9 @@ export default function Register() {
           />
           <p className={errorStyle}>{errors.email?.message}</p>
         </div>
+        {/* -------------------------- Email -------------------------- */}
 
+        {/* -------------------------- Password -------------------------- */}
         <div>
           <label className={labelStyle}>Password</label>
           <input
@@ -88,7 +122,9 @@ export default function Register() {
           />
           <p className={errorStyle}>{errors.password?.message}</p>
         </div>
+        {/* -------------------------- Password -------------------------- */}
 
+        {/* -------------------------- Age -------------------------- */}
         <div>
           <label className={labelStyle}>Age</label>
           <input
@@ -108,7 +144,9 @@ export default function Register() {
           />
           <p className={errorStyle}>{errors.age?.message}</p>
         </div>
+        {/* -------------------------- Age -------------------------- */}
 
+        {/* -------------------------- Phone -------------------------- */}
         <div>
           <label className={labelStyle}>Phone</label>
           <input
@@ -124,10 +162,13 @@ export default function Register() {
           />
           <p className={errorStyle}>{errors.phone?.message}</p>
         </div>
+        {/* -------------------------- Phone -------------------------- */}
 
+        {/* -------------------------- Button -------------------------- */}
         <button className={buttonStyle} type="submit">
           Register
         </button>
+        {/* -------------------------- Button -------------------------- */}
       </form>
     </Form>
   );

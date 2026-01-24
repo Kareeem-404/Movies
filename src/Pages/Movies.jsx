@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 export default function Movies() {
   const [movies, setMovies] = useState([]);
 
+  // -------------------------- Fetch Movies --------------------------
   useEffect(() => {
     fetchMovies();
   }, []);
@@ -14,11 +15,16 @@ export default function Movies() {
     const data = await res.json();
     setMovies(data.results || []);
   };
+  // -------------------------- Fetch Movies --------------------------
+
+  // -------------------------- Styles --------------------------
+  const cardStyle = "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 my-10 max-w-7xl mx-auto";
+  // -------------------------- Styles --------------------------
 
   return (
     <>
       <Title title="Movie Trend" />
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 my-10 max-w-7xl mx-auto">
+      <div className={cardStyle}>
         {movies.map((movie) => (
           <Card key={movie.id} title={movie.original_title} rating={movie.vote_average} type="movie" image={'https://image.tmdb.org/t/p/w500/' + movie.poster_path} movieId={movie.id} />
         ))}
