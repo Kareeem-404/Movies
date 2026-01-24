@@ -13,6 +13,7 @@ export default function Register() {
     formState: { errors },
   } = useForm();
 
+  // -------------------------- Handle API Errors --------------------------
   const handleApiErrors = (error) => {
     const errorMsg = error.msg;
     if (errorMsg === "email already exists") {
@@ -42,7 +43,9 @@ export default function Register() {
       })
     }
   }
+  // -------------------------- Handle API Errors --------------------------
 
+  // -------------------------- On Submit --------------------------
   const onSubmit = async (data) => {
     try {
       const response = fetch("https://note-sigma-black.vercel.app/api/v1/users/signUp", {
@@ -56,7 +59,9 @@ export default function Register() {
       handleApiErrors(error)
     }
   }
+  // -------------------------- On Submit --------------------------
 
+  // -------------------------- Styles --------------------------
   const labelStyle = "text-blue-300 font-medium text-2xl";
   const inputStyle =
     "border border-gray-300 rounded-md px-4 py-2 w-full mt-2 dark:text-white";
@@ -64,6 +69,7 @@ export default function Register() {
   const buttonStyle =
     "bg-blue-300 px-10 text-white py-3 rounded-md self-center cursor-pointer";
   const formStyle = "flex flex-col gap-6";
+  // -------------------------- Styles --------------------------
 
   return (
     <Form title="Register">

@@ -19,7 +19,7 @@ export default function TV() {
   return (
     <>
       <Title title="TV Trend" />
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 my-10 max-w-7xl mx-auto">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 my-10 max-w-7xl mx-auto">
         {movies.map((movie) => (
           <Card key={movie.id} title={movie.name} rating={movie.vote_average} type="tv" image={'https://image.tmdb.org/t/p/w500/' + movie.poster_path} movieId={movie.id} />
         ))}
