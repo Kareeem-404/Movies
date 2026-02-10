@@ -1,4 +1,4 @@
-import { useParams } from "react-router";
+import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 const Movie = () => {
@@ -22,15 +22,11 @@ const Movie = () => {
   const titleStyle = "text-2xl font-medium dark:text-white";
   const taglineStyle = "text-xl font-medium dark:text-white";
   const genreStyle = "text-white bg-blue-300 px-4 py-3 rounded";
-  const voteAverageStyle = "text-xl font-medium dark:text-white";
-  const voteCountStyle = "text-xl font-medium dark:text-white";
-  const dateStyle = "text-xl font-medium dark:text-white";
   const spanStyle = "text-blue-300";
-  const overviewStyle = "text-xl font-medium dark:text-white";
   const movieContainerStyle = "md:flex gap-10 mb-10 md:mb-0 max-w-7xl mx-auto";
   const imageContainerStyle = "md:w-1/2";
   const movieContentStyle = "md:w-3/4 space-y-5";
-  const genreContainerStyle = "flex gap-5";
+  const genreContainerStyle = "grid gap-5 grid-cols-2 md:grid-cols-3 xl:grid-cols-4";
   // -------------------------- Styles --------------------------
 
   return (
@@ -51,25 +47,21 @@ const Movie = () => {
         </p>
         <div className={genreContainerStyle}>
           {data.genres?.map((genre) => (
-            <p
-              className={genreStyle}
-              key={genre.id}
-            >
+            <p className={genreStyle} key={genre.id}>
               {genre.name}
             </p>
           ))}
         </div>
-        <p className={voteAverageStyle}>
-          Vote Average:{" "}
-          <span className={spanStyle}>{data.vote_average}</span>
+        <p className={taglineStyle}>
+          Vote Average: <span className={spanStyle}>{data.vote_average}</span>
         </p>
-        <p className={voteCountStyle}>
+        <p className={taglineStyle}>
           Vote count: <span className={spanStyle}>{data.vote_count}</span>
         </p>
-        <p className={dateStyle}>
+        <p className={taglineStyle}>
           Date: <span className={spanStyle}>{type === "movie" ? data.release_date : data.first_air_date}</span>
         </p>
-        <p className={overviewStyle}>
+        <p className={taglineStyle}>
           Overview: <span className={spanStyle}>{type === "movie" ? data.overview : data.overview}</span>
         </p>
       </div>

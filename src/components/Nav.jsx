@@ -1,16 +1,18 @@
-import { Link, useNavigate, NavLink } from "react-router";
-import Login from "../Pages/Login";
+import { Link, useNavigate, NavLink } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function Nav() {
 
     const navigate = useNavigate();
     const handleLogout = () => {
         localStorage.removeItem("token");
-        navigate("/login");        
+        navigate("/login"); 
+        toast.error('Logged-out', { autoClose: 600 })
     }
 
     // -------------------------- Styles --------------------------
-    const li_2_Style = "hover:bg-blue-900 py-2 cursor-pointer hover:ps-2 transition-all duration-200";
+    const li_2_Style = "hover:bg-blue-400 rounded-md py-2 cursor-pointer hover:ps-2 transition-all duration-200";
+    const linkStyle = ({ isActive }) => isActive ? "text-gray-700" : "text-white";
     // -------------------------- Styles --------------------------
 
     return (
@@ -25,13 +27,13 @@ export default function Nav() {
               <>
                 <ul className="flex gap-4 items-center">
                   <li>
-                    <NavLink to="/home" className={({ isActive }) => isActive ? "text-gray-700" : "text-white"}>Home</NavLink>
+                    <NavLink to="/home" className={linkStyle}>Home</NavLink>
                   </li>
                   <li>
-                    <NavLink to="/movies" className={({ isActive }) => isActive ? "text-gray-700" : "text-white"}>Movies</NavLink>
+                    <NavLink to="/movies" className={linkStyle}>Movies</NavLink>
                   </li>
                   <li>
-                    <NavLink to="/tv" className={({ isActive }) => isActive ? "text-gray-700" : "text-white"}>TV</NavLink>
+                    <NavLink to="/tv" className={linkStyle}>TV</NavLink>
                   </li>
                 </ul>
                 <span className="cursor-pointer">
@@ -41,10 +43,10 @@ export default function Nav() {
             ) : (
               <ul className="flex gap-4">
                 <li>
-                  <NavLink to="/login">Login</NavLink>
+                  <NavLink className={linkStyle} to="/login">Login</NavLink>
                 </li>
                 <li>
-                  <NavLink to="/register">Register</NavLink>
+                  <NavLink className={linkStyle} to="/register">Register</NavLink>
                 </li>
               </ul>
             )}
@@ -58,13 +60,13 @@ export default function Nav() {
               <>
                 <ul className="flex flex-col px-10 pb-4">
                   <li className={li_2_Style}>
-                    <NavLink to="/home">Home</NavLink>
+                    <NavLink className={linkStyle} to="/home">Home</NavLink>
                   </li>
                   <li className={li_2_Style}>
-                    <NavLink to="/movies">Movies</NavLink>
+                    <NavLink className={linkStyle} to="/movies">Movies</NavLink>
                   </li>
                   <li className={li_2_Style}>
-                    <NavLink to="/tv">TV</NavLink>
+                    <NavLink className={linkStyle} to="/tv">TV</NavLink>
                   </li>
                   <span className={li_2_Style}>
                     <span onClick={handleLogout}>Logout</span>
@@ -74,10 +76,10 @@ export default function Nav() {
             ) : (
               <ul className="flex flex-col px-10 pb-4">
                 <li className={li_2_Style}>
-                  <NavLink to="/">Login</NavLink>
+                  <NavLink className={linkStyle} to="/">Login</NavLink>
                 </li>
                 <li className={li_2_Style}>
-                  <NavLink to="/register">Register</NavLink>
+                  <NavLink className={linkStyle} to="/register">Register</NavLink>
                 </li>
               </ul>
             )}

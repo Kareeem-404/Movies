@@ -1,6 +1,7 @@
-import Title from "../components/Title";
-import Card from "../components/Card";
+import Title from "../components/Ui-components/Title";
+import Card from "../components/Ui-components/Card";
 import { useState, useEffect } from "react";
+import axios from "axios";
 
 export default function TV() {
 
@@ -11,9 +12,8 @@ export default function TV() {
   }, []);
 
   const fetchMovies = async () => {
-    const res = await fetch("https://api.themoviedb.org/3/trending/tv/day?api_key=44ee5523e457e74020effc2bddc4592e");
-    const data = await res.json();
-    setMovies(data.results || []);
+    const res = await axios.get("https://api.themoviedb.org/3/trending/tv/day?api_key=44ee5523e457e74020effc2bddc4592e");
+    setMovies(res.data.results || []);
   };
 
   return (

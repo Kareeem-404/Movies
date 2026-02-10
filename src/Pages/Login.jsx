@@ -1,8 +1,8 @@
-import Form from "../components/Form";
-import { useState, useRef } from "react";
-import { useNavigate } from "react-router";
+import Form from "../components/Ui-components/Form";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
+import axios from "axios";
 
 export default function Login() {
 
@@ -19,12 +19,14 @@ export default function Login() {
 
     // -------------------------- Handle API Errors --------------------------
     const handleApiErrors = (error) => {
-        if (error?.msg === "email not exist") {
+        const errorMsg = error?.response?.data?.msg;
+
+        if (errorMsg === "email not exist") {
             setError("email", {
                 type: "server",
                 message: "Email does not exist"
             });
-        } else if (error?.msg === "invalid password") {
+        } else if (errorMsg === "invalid password") {
             setError("password", {
                 type: "server",
                 message: "Incorrect password"
@@ -40,26 +42,23 @@ export default function Login() {
 
     // -------------------------- On Submit --------------------------
     const onSubmit = async (data) => {
-        try {
-            const response = await fetch("https://note-sigma-black.vercel.app/api/v1/users/signIn", {
-                method: "POST",
+        await axios.post(
+            "https://note-sigma-black.vercel.app/api/v1/users/signIn",
+            data,
+            {
                 headers: {
                     "Content-Type": "application/json"
-                },
-                body: JSON.stringify(data)
-            });
-            const result = await response.json()
-            if (!response.ok) {
-                throw result
+                }
             }
-            localStorage.setItem("token", result.token);
+        ).then(res => {
+            console.log(res.data);
+            localStorage.setItem("token", res.data.token);
             navigate("/home");
-            toast.success('Welcome', { autoClose: 1000 })
-
-        } catch (error) {
-            handleApiErrors(error)
-        }
-    }
+            toast.success(`Welcome`, { autoClose: 600 })
+        }).catch(error => {
+            handleApiErrors(error);
+        });
+    };
     // -------------------------- On Submit --------------------------
 
     // -------------------------- Styles --------------------------

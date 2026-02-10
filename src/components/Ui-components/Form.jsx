@@ -1,5 +1,5 @@
 import Title from "./Title";
-import image from "../assets/cute-cartoon-little-boy-sitting-on-the-moon-illustration-free-vector.jpg";
+import image from "../../assets/cute-cartoon-little-boy-sitting-on-the-moon-illustration-free-vector.jpg";
 
 // -------------------------- Styles --------------------------
 const formImageStyle = "w-full rounded-4xl";
