@@ -1,65 +1,14 @@
 import Form from "../components/Ui-components/Form";
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
-import { useForm } from "react-hook-form";
-import axios from "axios";
+import useLogin from "../Hooks/useLogin";
 
 export default function Login() {
 
-    const navigate = useNavigate();
-
     const { register,
         handleSubmit,
-        setError,
-        formState: {
-            errors,
-            isSubmitting
-        }
-    } = useForm()
-
-    // -------------------------- Handle API Errors --------------------------
-    const handleApiErrors = (error) => {
-        const errorMsg = error?.response?.data?.msg;
-
-        if (errorMsg === "email not exist") {
-            setError("email", {
-                type: "server",
-                message: "Email does not exist"
-            });
-        } else if (errorMsg === "invalid password") {
-            setError("password", {
-                type: "server",
-                message: "Incorrect password"
-            });
-        } else {
-            setError("root", {
-                type: "server",
-                message: "Something went wrong, try again"
-            });
-        }
-    };
-    // -------------------------- Handle API Errors --------------------------
-
-    // -------------------------- On Submit --------------------------
-    const onSubmit = async (data) => {
-        await axios.post(
-            "https://note-sigma-black.vercel.app/api/v1/users/signIn",
-            data,
-            {
-                headers: {
-                    "Content-Type": "application/json"
-                }
-            }
-        ).then(res => {
-            console.log(res.data);
-            localStorage.setItem("token", res.data.token);
-            navigate("/home");
-            toast.success(`Welcome`, { autoClose: 600 })
-        }).catch(error => {
-            handleApiErrors(error);
-        });
-    };
-    // -------------------------- On Submit --------------------------
+        onSubmit,
+        errors,
+        isSubmitting
+    } = useLogin();
 
     // -------------------------- Styles --------------------------
     const labelStyle = "text-blue-300 font-medium text-2xl";
