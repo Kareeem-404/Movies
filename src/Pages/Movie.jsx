@@ -1,21 +1,11 @@
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import useFetch from "../Hooks/useFetch";
 
 const Movie = () => {
 
   const { id, type } = useParams();
-  const [data, setData] = useState([]);
+  const movie = useFetch(`https://api.themoviedb.org/3/${type}/${id}?api_key=bd7de1002d5d536889f2190d815dc7ec`);
 
-  // -------------------------- Fetch Movie --------------------------
-  useEffect(() => {
-    const fetchMovie = async () => {
-      const res = await fetch(`https://api.themoviedb.org/3/${type}/${id}?api_key=bd7de1002d5d536889f2190d815dc7ec`);
-      const data = await res.json();
-      setData(data);
-    };
-    fetchMovie();
-  }, []);
-  // -------------------------- Fetch Movie --------------------------
 
   // -------------------------- Styles --------------------------
   const imageStyle = "w-full h-full object-cover";
@@ -34,35 +24,35 @@ const Movie = () => {
       <div className={imageContainerStyle}>
         <img
           className={imageStyle}
-          src={"https://image.tmdb.org/t/p/w500/" + data.poster_path}
+          src={"https://image.tmdb.org/t/p/w500/" + movie.poster_path}
           alt=""
         />
       </div>
       <div className={movieContentStyle}>
         <h2 className={titleStyle}>
-          Title: <span className={spanStyle}>{type === "movie" ? data.title : data.name}</span>
+          Title: <span className={spanStyle}>{type === "movie" ? movie.title : movie.name}</span>
         </h2>
         <p className={taglineStyle}>
-          Tagline: <span className={spanStyle}>{type === "movie" ? data.tagline : data.tagline}</span>
+          Tagline: <span className={spanStyle}>{type === "movie" ? movie.tagline : movie.tagline}</span>
         </p>
         <div className={genreContainerStyle}>
-          {data.genres?.map((genre) => (
+          {movie.genres?.map((genre) => (
             <p className={genreStyle} key={genre.id}>
               {genre.name}
             </p>
           ))}
         </div>
         <p className={taglineStyle}>
-          Vote Average: <span className={spanStyle}>{data.vote_average}</span>
+          Vote Average: <span className={spanStyle}>{movie.vote_average}</span>
         </p>
         <p className={taglineStyle}>
-          Vote count: <span className={spanStyle}>{data.vote_count}</span>
+          Vote count: <span className={spanStyle}>{movie.vote_count}</span>
         </p>
         <p className={taglineStyle}>
-          Date: <span className={spanStyle}>{type === "movie" ? data.release_date : data.first_air_date}</span>
+          Date: <span className={spanStyle}>{type === "movie" ? movie.release_date : movie.first_air_date}</span>
         </p>
         <p className={taglineStyle}>
-          Overview: <span className={spanStyle}>{type === "movie" ? data.overview : data.overview}</span>
+          Overview: <span className={spanStyle}>{type === "movie" ? movie.overview : movie.overview}</span>
         </p>
       </div>
     </div>
