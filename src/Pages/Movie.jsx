@@ -6,7 +6,6 @@ const Movie = () => {
   const { id, type } = useParams();
   const movie = useFetch(`https://api.themoviedb.org/3/${type}/${id}?api_key=bd7de1002d5d536889f2190d815dc7ec`);
 
-
   // -------------------------- Styles --------------------------
   const imageStyle = "w-full h-full object-cover";
   const titleStyle = "text-2xl font-medium dark:text-white";

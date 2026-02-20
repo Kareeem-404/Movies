@@ -6,8 +6,8 @@ export default function useFetch(api) {
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await axios.get(api);
-      setData(res.data || []);
+      const res = await axios.get(api);      
+      setData(res.data.results || res.data || []);
     };
 
     fetchData();

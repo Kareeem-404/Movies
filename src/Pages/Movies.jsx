@@ -4,7 +4,7 @@ import useFetch from "../Hooks/useFetch";
 
 export default function Movies() {
   const movies = useFetch("https://api.themoviedb.org/3/trending/movie/day?api_key=44ee5523e457e74020effc2bddc4592e");
-
+  
   const cardStyle =
     "grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 my-10 max-w-7xl mx-auto";
 
