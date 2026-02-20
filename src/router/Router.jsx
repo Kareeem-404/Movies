@@ -1,11 +1,11 @@
 import { createBrowserRouter, redirect } from "react-router-dom";
 import MainLayout from "../layout/Mainlayout";
-import Home from "../pages/Home";
-import Movies from "../pages/Movies";
-import TV from "../pages/TV";
-import Movie from "../pages/Movie";
-import Login from "../pages/Login";
-import Register from "../pages/Register";
+import Home from "../Pages/Home";
+import Movies from "../Pages/Movies";
+import TV from "../Pages/TV";
+import Movie from "../Pages/Movie";
+import Login from "../Pages/Login";
+import Register from "../Pages/Register";
 
 // ------------------ AUTH GUARDS ------------------
 
