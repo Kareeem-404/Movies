@@ -43,7 +43,7 @@ export default function Login() {
                         id="password"
                         className={inputStyle}
                         type="password"
-                        placeholder="••••••••"
+                        placeholder="********"
                         {...register("password", { required: "password is required" })}
                     />
                     {errors.password && (

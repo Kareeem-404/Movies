@@ -50,7 +50,7 @@ export default function Register() {
           <input
             className={inputStyle}
             type="password"
-            placeholder="••••••••"
+            placeholder="********"
             {...register("password")}
           />
           {errors.password && (
