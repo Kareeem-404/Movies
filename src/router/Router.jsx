@@ -4,6 +4,7 @@ import Home from "../Pages/Home";
 import Movies from "../Pages/Movies";
 import TV from "../Pages/TV";
 import Movie from "../Pages/Movie";
+import Search from "../Pages/Search";
 import Login from "../Pages/Login";
 import Register from "../Pages/Register";
 
@@ -43,6 +44,11 @@ export const router = createBrowserRouter([
         path: "tv",
         loader: requireAuth,
         element: <TV />,
+      },
+      {
+        path: "search",
+        loader: requireAuth,
+        element: <Search />,
       },
       {
         path: ":type/:id",

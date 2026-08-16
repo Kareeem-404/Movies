@@ -63,7 +63,11 @@ const useLogin = () => {
 
             localStorage.setItem("token", res.data.token);
             navigate("/home");
-            toast.success("Welcome", { autoClose: 600 });
+            toast.success("Welcome", { 
+                autoClose: 800,
+                theme: "dark",
+
+             });
 
         } catch (error) {
             handleApiErrors(error);
