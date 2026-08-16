@@ -142,7 +142,7 @@ export default function Form({ children, title }) {
         </div>
 
         {/* ================= RIGHT / FORM ================= */}
-        <div className="min-h-[680px] rounded-3xl border border-white/10 bg-[#0b1120]/95 p-6 shadow-2xl shadow-black/30 backdrop-blur-xl sm:p-10">
+        <div className=" rounded-3xl border border-white/10 bg-[#0b1120]/95 p-6 shadow-2xl shadow-black/30 backdrop-blur-xl sm:p-10">
 
           <Title title={title} />
 
