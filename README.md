@@ -6,38 +6,38 @@ A modern, responsive **Movies & TV Shows discovery application** built with **Re
 
 ---
 
-## ✨ Features
+## Features
 
-- 🔐 **Authentication System**
+- **Authentication System**
   - User registration with full validation (name, email, password, age, phone)
   - Login with secure password handling
   - Protected routes — you must be logged in to browse content
   - Token stored in `localStorage` for session persistence
 
-- 🎥 **Trending Movies**
+- **Trending Movies**
   - Fetches daily trending movies from the TMDB API
   - Displays posters, titles, and ratings in a responsive grid
 
-- 📺 **Trending TV Shows**
+- **Trending TV Shows**
   - Fetches daily trending TV series from the TMDB API
   - Same responsive card grid with ratings and hover overlays
 
-- 📄 **Detail Pages**
+- **Detail Pages**
   - Click any movie/TV card to view full details
   - Shows title, tagline, genres, rating, vote count, release date, and overview
 
-- 🎨 **Responsive & Accessible UI**
+- **Responsive & Accessible UI**
   - Mobile-friendly navigation with hamburger menu
   - Dark-mode-ready design (Tailwind)
   - Toast notifications for feedback
 
-- 🧭 **Routing**
+- **Routing**
   - Client-side routing with React Router v7
   - Auth guards for protected and public routes
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 | Category        | Technology                              |
 | --------------- | --------------------------------------- |
@@ -53,7 +53,7 @@ A modern, responsive **Movies & TV Shows discovery application** built with **Re
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -87,7 +87,7 @@ The app will be available at [http://localhost:5173](http://localhost:5173).
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 Movies-main/
@@ -129,7 +129,7 @@ Movies-main/
 
 ---
 
-## 🔌 API Usage
+## API Usage
 
 This app consumes **two external APIs**:
 
@@ -149,7 +149,7 @@ Images are served from:
 https://image.tmdb.org/t/p/w500/<poster_path>
 ```
 
-> ⚠️ **Note:** The TMDB API key is currently hardcoded in the source files
+> **Note:** The TMDB API key is currently hardcoded in the source files
 > (`src/Pages/Movies.jsx`, `src/Pages/TV.jsx`, `src/Pages/Movie.jsx`, `src/Hooks/useFetch.js`).
 > For production, move it to an environment variable (e.g. `VITE_TMDB_API_KEY`).
 
@@ -165,7 +165,7 @@ the route guards to protect private pages.
 
 ---
 
-## 🧭 Routes
+## Routes
 
 | Path              | Visibility | Description                          |
 | ----------------- | ---------- | ------------------------------------ |
@@ -179,7 +179,7 @@ the route guards to protect private pages.
 
 ---
 
-## ☁️ Deployment
+## Deployment
 
 The app is deployed on **Vercel** using the `vercel.json` config included in the repo.
 
@@ -195,7 +195,7 @@ Live URL: [https://movies-xi-amber.vercel.app/](https://movies-xi-amber.vercel.a
 
 ---
 
-## 📝 License
+## License
 
 This project is for **educational/demo purposes**. All movie and TV data belongs to
 [The Movie Database (TMDB)](https://www.themoviedb.org/) and is used under their API terms.
