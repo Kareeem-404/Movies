@@ -1,4 +1,4 @@
-# 🎬 Movies & TV Shows App
+# Movies & TV Shows App
 
 A modern, responsive **Movies & TV Shows discovery application** built with **React 19** and **Vite**. Browse the latest trending movies and TV shows, view detailed information, and manage your account — all in a clean, Tailwind-styled interface.
 
